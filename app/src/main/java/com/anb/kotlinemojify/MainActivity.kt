@@ -79,10 +79,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (requestCode) {
             REQUEST_STORAGE_PERMISSION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // If you get permission, launch the camera
                     launchCamera()
                 } else {
-                    // If you do not get permission, show a Toast
                     Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -126,13 +124,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // If the image capture activity was called and was successful
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            // Process the image and set it to the TextView
             processAndSetImage()
         } else {
-
-            // Otherwise, delete the temporary image file
             BitmapUtils.deleteImageFile(this, mTempPhotoPath!!)
         }
     }
